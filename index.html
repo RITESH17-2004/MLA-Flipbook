@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swarajya | Interactive PDF Flipbook</title>
+    <!-- Google Fonts for an elegant, literary feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Floating Minimal Header -->
+    <header class="app-header floating">
+      <div class="header-content">
+        <h1 class="logo">Swarajya</h1>
+        <p class="subtitle hide-mobile">Literary Association</p>
+      </div>
+      <div class="controls">
+        <span class="page-info">
+          <span id="page-current">0</span> / <span id="page-total">0</span>
+        </span>
+      </div>
+    </header>
+
+    <!-- Floating Navigation Arrows -->
+    <button id="btn-prev" class="nav-arrow left-arrow" aria-label="Previous Page">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    
+    <button id="btn-next" class="nav-arrow right-arrow" aria-label="Next Page">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+
+    <!-- Main Container taking up entire screen -->
+    <main class="flipbook-container">
+      <div id="loader" class="loader">
+        <div class="spinner"></div>
+        <p>Loading Magazine...</p>
+      </div>
+      <div id="flipbook-wrapper">
+        <div id="flipbook" class="flipbook" style="display: none;">
+          <!-- Pages will be dynamically injected here -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Help Modal -->
+    <div id="instruction-modal" class="modal">
+      <div class="modal-content">
+        <h2>Welcome to Swarajya Magazine</h2>
+        <p>Drag the corners of the pages to flip realistically, or use the navigation arrows on the sides of the screen.</p>
+        <button id="btn-close-modal" class="btn btn-primary" style="margin-top: 10px;">Start Reading</button>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
