@@ -305,13 +305,15 @@ body {
 
   .flipbook-container {
     padding: 0px;
+    flex-direction: column; /* CRITICAL: Stack top-to-bottom so flex-start pushes to the top */
     height: calc(100vh - 43px);
     height: calc(100dvh - 43px);
-    top: 43px; /* Snap tightly to the true header height */
+    top: 43px; 
     justify-content: flex-start; /* Start from top */
     align-items: center; /* Keep everything centered horizontally */
-    padding-top: 5px; /* Minimal 5px gap beneath header */
+    padding-top: 5px; 
     position: absolute;
+    width: 100vw;
   }
 
   #flipbook-wrapper {
