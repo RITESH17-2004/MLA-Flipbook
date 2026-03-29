@@ -305,12 +305,12 @@ body {
 
   .flipbook-container {
     padding: 0px;
-    height: calc(100vh - 45px);
-    height: calc(100dvh - 45px);
-    top: 45px; /* Snap tighter to the header height */
+    height: calc(100vh - 43px);
+    height: calc(100dvh - 43px);
+    top: 43px; /* Snap tightly to the true header height */
     justify-content: flex-start; /* Start from top */
     align-items: center; /* Keep everything centered horizontally */
-    padding-top: 10px; /* Increased comfortable gap beneath the header */
+    padding-top: 5px; /* Minimal 5px gap beneath header */
     position: absolute;
   }
 
@@ -348,11 +348,12 @@ body {
   .nav-arrow:hover {
     background: #ffffff;
     color: var(--swarajya-saffron);
+    transform: none !important; /* Strictly stop desktop translateY jump */
   }
 
   .nav-arrow:active {
     background: #f0f0f0;
-    transform: scale(0.95);
+    transform: none !important; /* Disable any tap shrinking as well */
   }
   
   .left-arrow { 
