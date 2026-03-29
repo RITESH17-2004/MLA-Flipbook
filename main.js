@@ -61,11 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Perfect Aspect Ratio Resizer
     const updateDimensions = () => {
-      // Calculate available screen space explicitly avoiding the header
-      const headerOffset = window.innerWidth <= 768 ? 45 : 60;
-      const containerHeight = window.innerHeight - headerOffset;
+      // Calculate sizes safely based on the actual container bounds (fixes 100vh system ui bugs)
+      const flipContainer = document.querySelector('.flipbook-container');
+      const containerWidth = flipContainer ? flipContainer.clientWidth : window.innerWidth;
+      const containerHeight = flipContainer ? flipContainer.clientHeight : window.innerHeight;
 
-      let availWidth = window.innerWidth * 0.90;
+      let availWidth = containerWidth * 0.90;
       let availHeight = containerHeight * 0.95;
 
       // page-flip triggers portrait mode if container width < minWidth * 2
@@ -73,9 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const isPortrait = availWidth < 520;
 
       if (isPortrait) {
-        // On mobile portrait, we remove constraints to use maximum screen
-        availWidth = window.innerWidth * 0.96;
-        availHeight = containerHeight - 150; // Leave 75px margin top/bottom to clear bottom buttons
+        // On mobile portrait, we use maximum screen width
+        availWidth = containerWidth * 0.95;
+        // Leave space for bottom pill controls
+        availHeight = containerHeight - 120;
       }
 
       // Calculate aspect ratio of the physical book. 

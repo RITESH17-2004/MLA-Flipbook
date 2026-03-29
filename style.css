@@ -259,10 +259,20 @@ body {
 
 /* MOBILE */
 @media screen and (max-width: 768px) {
+  body {
+    overflow: hidden; /* Avoid native scroll bouncing; native zoom handling is via touch-action */
+  }
+
+  .flipbook-container, #flipbook, #flipbook-wrapper, .page, .page-image {
+    touch-action: pan-y pinch-zoom !important;
+  }
+
   .app-header {
-    padding: 8px 15px;
+    padding: 10px 15px;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* clean separation */
   }
 
   .header-content {
@@ -270,8 +280,9 @@ body {
   }
 
   .header-content .logo {
-    font-size: 20px;
+    font-size: 18px; /* Slightly smaller for elegance */
     letter-spacing: 1px;
+    margin: 0;
   }
 
   .header-content .subtitle {
@@ -285,41 +296,85 @@ body {
 
   .page-info {
     font-size: 12px;
-    padding: 4px 10px;
-  }
-
-  body {
-    overflow: auto;
-  }
-
-  .flipbook-container, #flipbook, #flipbook-wrapper, .page, .page-image {
-    touch-action: pan-y pinch-zoom !important;
+    padding: 5px 12px;
+    background: rgba(0, 0, 0, 0.04);
+    box-shadow: none; /* simple, no deep shadow */
+    border-radius: 12px;
+    font-weight: 600;
   }
 
   .flipbook-container {
     padding: 0px;
     height: calc(100vh - 45px);
-    top: 45px;
+    height: calc(100dvh - 45px);
+    top: 45px; /* Snap tighter to the header height */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Start from top */
+    align-items: center; /* Keep everything centered horizontally */
+    padding-top: 10px; /* Guaranteed extremely small 10px gap beneath header */
   }
 
+  #flipbook-wrapper {
+    margin-bottom: 0px; /* Reset */
+    flex-shrink: 0; /* Keep JS dimensions exact */
+  }
+
+  /* The container holding the pill directly beneath the magazine */
+  .mobile-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px; /* The specific "little gap" below the magazine */
+    z-index: 50;
+  }
+
+  /* Professional Pill Navigation */
   .nav-arrow {
-    width: 44px;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.8);
-    top: auto;
-    bottom: 25px;
+    position: static; /* Flow inside the flex container instead of floating */
+    width: 65px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
     transform: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12); /* unified shadow look */
+    color: #444;
+    border: none;
+  }
+
+  /* Hover only on primary pointing devices to prevent stickiness on mobile */
+  @media (hover: hover) {
+    .nav-arrow:hover {
+      transform: none;
+      background: #ffffff;
+      color: var(--swarajya-saffron);
+    }
+  }
+
+  .nav-arrow:active {
+    background: #f0f0f0;
+    transform: scale(0.95);
   }
   
-  .nav-arrow:hover {
-    transform: scale(1.1);
+  .left-arrow { 
+    border-radius: 24px 0 0 24px;
+    border-right: 1px solid rgba(0,0,0,0.06);
+    left: auto;
   }
-  
-  .left-arrow { left: calc(50% - 60px); }
-  .right-arrow { right: calc(50% - 60px); }
+
+  .right-arrow { 
+    border-radius: 0 24px 24px 0;
+    right: auto;
+  }
+
+  .nav-arrow svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.2;
+  }
 
   .modal-content {
-    width: 95%;
+    width: 90%;
     margin: 10px;
+    padding: 30px 20px;
   }
 }

@@ -22,15 +22,6 @@
       </div>
     </header>
 
-    <!-- Floating Navigation Arrows -->
-    <button id="btn-prev" class="nav-arrow left-arrow" aria-label="Previous Page">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-    </button>
-    
-    <button id="btn-next" class="nav-arrow right-arrow" aria-label="Next Page">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-    </button>
-
     <!-- Main Container taking up entire screen -->
     <main class="flipbook-container">
       <div id="loader" class="loader">
@@ -41,6 +32,16 @@
         <div id="flipbook" class="flipbook" style="display: none;">
           <!-- Pages will be dynamically injected here -->
         </div>
+      </div>
+      
+      <!-- Navigation Controls (Pill on Mobile) -->
+      <div class="mobile-controls">
+        <button id="btn-prev" class="nav-arrow left-arrow" aria-label="Previous Page">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button id="btn-next" class="nav-arrow right-arrow" aria-label="Next Page">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
       </div>
     </main>
 
