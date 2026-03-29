@@ -311,7 +311,7 @@ body {
     top: 43px; 
     justify-content: flex-start; /* Start from top */
     align-items: center; /* Keep everything centered horizontally */
-    padding-top: 10px; 
+    padding-top: 20px; 
     position: absolute;
     width: 100vw;
   }
