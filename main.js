@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
       maxShadowOpacity: 0.5,
       showCover: true,
       usePortrait: true, // Automatically switch to single page on vertical screens (mobile)
-      mobileScrollSupport: false,
+      mobileScrollSupport: true, // IMPORTANT: Allows native pinch-to-zoom and multi-touch to pass through to the browser!
       flippingTime: 1000, // 1 second flipping time
     });
 

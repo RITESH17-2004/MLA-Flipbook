@@ -260,7 +260,7 @@ body {
 /* MOBILE */
 @media screen and (max-width: 768px) {
   body {
-    overflow: hidden; /* Avoid native scroll bouncing; native zoom handling is via touch-action */
+    overflow: auto !important; /* CRITICAL: Must be auto to allow finger panning when perfectly zoomed! */
   }
 
   .flipbook-container, #flipbook, #flipbook-wrapper, .page, .page-image {
@@ -311,7 +311,7 @@ body {
     top: 43px; 
     justify-content: flex-start; /* Start from top */
     align-items: center; /* Keep everything centered horizontally */
-    padding-top: 5px; 
+    padding-top: 10px; 
     position: absolute;
     width: 100vw;
   }
