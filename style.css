@@ -308,10 +308,10 @@ body {
     height: calc(100vh - 45px);
     height: calc(100dvh - 45px);
     top: 45px; /* Snap tighter to the header height */
-    flex-direction: column; /* Stack items vertically */
     justify-content: flex-start; /* Start from top */
     align-items: center; /* Keep everything centered horizontally */
-    padding-top: 10px; /* Guaranteed extremely small 10px gap beneath header */
+    padding-top: 30px; /* Increased comfortable gap beneath the header */
+    position: absolute;
   }
 
   #flipbook-wrapper {
@@ -319,18 +319,22 @@ body {
     flex-shrink: 0; /* Keep JS dimensions exact */
   }
 
-  /* The container holding the pill directly beneath the magazine */
+  /* The container holding the pill strictly fixed to the bottom to avoid 3D rendering overlap */
   .mobile-controls {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15px; /* The specific "little gap" below the magazine */
-    z-index: 50;
+    z-index: 99;
+    width: auto;
   }
 
   /* Professional Pill Navigation */
   .nav-arrow {
-    position: static; /* Flow inside the flex container instead of floating */
+    position: relative; 
     width: 65px;
     height: 48px;
     background: rgba(255, 255, 255, 0.96);
@@ -341,13 +345,9 @@ body {
     border: none;
   }
 
-  /* Hover only on primary pointing devices to prevent stickiness on mobile */
-  @media (hover: hover) {
-    .nav-arrow:hover {
-      transform: none;
-      background: #ffffff;
-      color: var(--swarajya-saffron);
-    }
+  .nav-arrow:hover {
+    background: #ffffff;
+    color: var(--swarajya-saffron);
   }
 
   .nav-arrow:active {
