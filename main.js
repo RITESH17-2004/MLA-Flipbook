@@ -61,24 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Perfect Aspect Ratio Resizer
     const updateDimensions = () => {
-      // Force single page (portrait) ONLY explicitly on mobile screen sizes (< 768px width)
-      // Laptops will ALWAYS remain double-page spreads, even if the browser window is shrunk vertically.
-      const isPortrait = window.innerWidth <= 768;
+      // Calculate available screen space explicitly avoiding the header
+      const headerOffset = window.innerWidth <= 768 ? 45 : 60;
+      const containerHeight = window.innerHeight - headerOffset;
+
+      let availWidth = window.innerWidth * 0.90;
+      let availHeight = containerHeight * 0.95;
+
+      // page-flip triggers portrait mode if container width < minWidth * 2
+      // We will set our minWidth to 260, so threshold is 520.
+      const isPortrait = availWidth < 520;
+
+      if (isPortrait) {
+        // On mobile portrait, we remove constraints to use maximum screen
+        availWidth = window.innerWidth * 0.98;
+        availHeight = containerHeight * 0.98;
+      }
 
       // Calculate aspect ratio of the physical book. 
       // If portrait, it's 1 page wide. If landscape, it's 2 pages wide.
       const bookRatio = isPortrait ? (baseWidth / baseHeight) : ((baseWidth * 2) / baseHeight);
-
-      // Calculate available screen space (leaving safe margins so it feels "overall small")
-      // We'll use 85% width and 80% height on desktop to keep it well within bounds
-      let availWidth = window.innerWidth * 0.85;
-      let availHeight = window.innerHeight * 0.80;
-
-      // On mobile portrait, we can use slightly more width since no arrows
-      if (isPortrait) {
-        availWidth = window.innerWidth * 0.95;
-        availHeight = window.innerHeight * 0.85;
-      }
 
       const availRatio = availWidth / availHeight;
 
@@ -91,6 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Available space is taller than needed -> constrained by width
         finalWidth = availWidth;
         finalHeight = availWidth / bookRatio;
+      }
+
+      // Safeguard to ensure wrapper never shrinks below the engine's minWidth to avoid clipping
+      if (isPortrait && finalWidth < 260) {
+        finalWidth = 260;
+        finalHeight = 260 / bookRatio;
       }
 
       // Apply the mathematical perfection to our rigid wrapper
@@ -106,9 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
       width: baseWidth,
       height: baseHeight,
       size: 'stretch', // Stretches perfectly to our wrapper without distortion!
-      minWidth: 10,
+      minWidth: 260, // Matches 520 threshold perfectly
       maxWidth: 10000, // Virtually disabled so our wrapper enforces the bounds
-      minHeight: 10,
+      minHeight: 260,
       maxHeight: 10000,
       maxShadowOpacity: 0.5,
       showCover: true,

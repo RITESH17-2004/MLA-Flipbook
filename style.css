@@ -1,11 +1,8 @@
 :root {
   --swarajya-saffron: #FF671F;
-  --swarajya-gold: #D4AF37;
   --swarajya-bg: #f4ebd8;
-  /* off-white parchment feel */
   --text-dark: #2C2A29;
   --text-light: #F9F6F0;
-  --header-bg: #FFFFFF;
 }
 
 * {
@@ -22,10 +19,9 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  /* absolutely no scrolling */
 }
 
-/* Floating Header */
+/* HEADER */
 .app-header.floating {
   position: fixed;
   top: 0;
@@ -34,31 +30,31 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background: transparent;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding: 10px 40px;
+
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+
   z-index: 50;
   pointer-events: none;
-  /* Let clicks pass through empty parts of header */
 }
 
 .header-content,
 .controls {
   pointer-events: auto;
-  /* Re-enable clicks for actual header elements */
 }
 
+/* 🔥 SWARAJYA TEXT (ONLY COLOR CHANGED) */
 .header-content .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  color: #c94f12;
-  /* darker saffron for better contrast on background */
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  color: #6e4e09bd; /* 👈 CHANGE THIS */
 }
 
+/* subtitle */
 .header-content .subtitle {
   font-size: 11px;
   color: #666;
@@ -67,36 +63,45 @@ body {
   margin-top: 2px;
 }
 
+/* page info */
 .page-info {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: #444;
+  color: #333;
+
   background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
   padding: 8px 18px;
   border-radius: 20px;
 }
 
-/* Floating Navigation Arrows */
+/* NAV ARROWS */
 .nav-arrow {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.5);
+
+  background: rgba(255, 255, 255, 0.6);
   border: none;
   border-radius: 50%;
+
   width: 50px;
   height: 50px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   cursor: pointer;
   z-index: 40;
+
   color: var(--text-dark);
   transition: all 0.2s ease;
+
   backdrop-filter: blur(5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
 }
 
 .nav-arrow:hover {
@@ -113,22 +118,19 @@ body {
   right: 30px;
 }
 
-/* Absolute Flipbook Container bounds */
+/* FLIPBOOK */
 .flipbook-container {
-  height: 100vh;
+  height: calc(100vh - 60px);
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 0;
+  top: 60px;
   left: 0;
-  box-sizing: border-box;
   perspective: 2000px;
-  /* padding removed; size boundaries will be mathematically handled by JS */
 }
 
-/* Inner tight wrapper that we will carefully control with JS */
 #flipbook-wrapper {
   position: relative;
   display: flex;
@@ -163,50 +165,44 @@ body {
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
   100% {
     transform: rotate(360deg);
   }
 }
 
-/* Flipbook Core */
+/* Pages */
 .page {
   background-color: white;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15), inset 0 0 15px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.18);
 }
 
 .page-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background: white;
 }
 
-/* Optional shading for realism on the fold */
+/* Fold shading */
 .page-fold {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 30px;
   pointer-events: none;
-  /* so users don't interact with the shadow */
 }
 
 .page-left .page-fold {
   right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.15), transparent);
 }
 
 .page-right .page-fold {
   left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.15), transparent);
 }
 
-/* Button overrides for modal */
+/* Buttons */
 .btn-primary {
   background-color: var(--swarajya-saffron);
   color: var(--text-light);
@@ -221,16 +217,12 @@ body {
   background-color: #e55712;
 }
 
-/* Modals */
+/* Modal */
 .modal {
   display: flex;
-  /* Hidden by default via class toggle, flex handles centering when active */
   position: fixed;
   z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
   justify-content: center;
@@ -247,75 +239,72 @@ body {
 
 .modal-content {
   background-color: #fff;
-  padding: 40px;
+  padding: clamp(25px, 5vw, 40px);
   border-radius: 12px;
+  width: 90%;
   max-width: 500px;
   text-align: center;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
   border-top: 5px solid var(--swarajya-saffron);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 .modal-content h2 {
-  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 4vw, 28px);
   color: var(--text-dark);
-  margin-bottom: 15px;
 }
 
-.modal-content p {
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 25px;
-}
-
-/* --- Responsive Media Queries --- */
+/* MOBILE */
 @media screen and (max-width: 768px) {
   .app-header {
-    padding: 12px 15px;
-    flex-direction: column;
-    gap: 12px;
+    padding: 8px 15px;
+    flex-direction: row;
+    gap: 10px;
   }
 
   .header-content {
-    text-align: center;
+    text-align: left;
   }
 
   .header-content .logo {
-    font-size: 24px;
+    font-size: 20px;
+    letter-spacing: 1px;
   }
 
   .header-content .subtitle {
     display: none;
-    /* Hide subtitle for cleaner mobile UI */
   }
 
   .controls {
-    width: 100%;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .btn {
-    padding: 8px 12px;
-    font-size: 13px;
+    width: auto;
+    justify-content: flex-end;
   }
 
   .page-info {
-    font-size: 13px;
-    padding: 6px 12px;
+    font-size: 12px;
+    padding: 4px 10px;
   }
 
   .flipbook-container {
-    padding: 10px;
-    /* Maximize book space */
+    padding: 0px;
+    height: calc(100vh - 45px);
+    top: 45px;
   }
 
-  .app-footer {
-    display: none;
-    /* Hide footer text on mobile */
+  .nav-arrow {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.4);
   }
+  
+  .left-arrow { left: 5px; }
+  .right-arrow { right: 5px; }
 
   .modal-content {
-    padding: 25px 20px;
-    margin: 15px;
+    width: 95%;
+    margin: 10px;
   }
 }
