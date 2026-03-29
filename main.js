@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (isPortrait) {
         // On mobile portrait, we remove constraints to use maximum screen
-        availWidth = window.innerWidth * 0.98;
-        availHeight = containerHeight * 0.98;
+        availWidth = window.innerWidth * 0.96;
+        availHeight = containerHeight - 150; // Leave 75px margin top/bottom to clear bottom buttons
       }
 
       // Calculate aspect ratio of the physical book. 
