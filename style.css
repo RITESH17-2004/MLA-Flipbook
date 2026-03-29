@@ -310,7 +310,7 @@ body {
     top: 45px; /* Snap tighter to the header height */
     justify-content: flex-start; /* Start from top */
     align-items: center; /* Keep everything centered horizontally */
-    padding-top: 20px; /* Increased comfortable gap beneath the header */
+    padding-top: 10px; /* Increased comfortable gap beneath the header */
     position: absolute;
   }
 
